@@ -3,12 +3,14 @@ package com.mbakara.servicelmpl;
 import com.mbakara.dto.LoginRequest;
 import com.mbakara.dto.Request;
 import com.mbakara.dto.Response;
+import com.mbakara.dto.UserInfo;
 import com.mbakara.model.User;
 import com.mbakara.repository.UserRepository;
 import com.mbakara.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private ModelMapper modelMapper;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public ResponseEntity<Response> signUp(Request request) {
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
              User user = User.builder()
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .build();
@@ -42,7 +45,7 @@ public class UserServiceImpl implements UserService {
         return ResponseEntity.ok(Response.builder()
                         .statusCode(200)
                         .responseMessage("SUCCESSFUL")
-                        .userInfo(modelMapper.map(savedUser, Request.class))
+                        .userInfo(modelMapper.map(savedUser, UserInfo.class))
                         .build()
         );
     }
