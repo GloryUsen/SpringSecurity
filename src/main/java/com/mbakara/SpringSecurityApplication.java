@@ -11,11 +11,7 @@ public class SpringSecurityApplication {
     @Bean
     public ModelMapper modelMapper(){
          return new ModelMapper(); // ModelMapper is a library that maps objects to objects.
-
-
     }
-
-
     public static void main(String[] args) {
         SpringApplication.run(SpringSecurityApplication.class, args);
     }

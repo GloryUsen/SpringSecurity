@@ -1,0 +1,4 @@
+ Is to SetUp Email Configuration and email services.
+ Create a method that Generates a random four digit code.
+ Create a method that sends the OTP.
+ A method that validates the otp, so while validating the otp, you check(the correctness of the code and Time timelapse)

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
@@ -26,7 +27,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(HttpMethod.POST, "api/v1/auth/signup").permitAll().anyRequest().permitAll()
+                        authorize.requestMatchers(HttpMethod.POST, "api/v1/auth/signup").permitAll()
                                 .anyRequest().authenticated());
         return httpSecurity.build();
     }
